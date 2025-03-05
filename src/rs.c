@@ -3,14 +3,13 @@
 #include <string.h>
 #include <correct.h>
 
-// To compile, do not forget to add `-lcorrect` to gcc call
 
-#define NUM_ROOTS 16
-#define MSG_LEN (255 - NUM_ROOTS)  // 239 bytes
+#define PARITY 32
+#define MSG_LEN (255 - PARITY)  // 223 bytes de datos
 
 int main() {
     uint8_t message[MSG_LEN];
-    uint8_t encoded[256];  // 255 bytes will be written
+    uint8_t encoded[255];  // 255 bytes will be written
     uint8_t decoded[MSG_LEN];
 
     // Initialize the message (example: fill with a sequence)
@@ -25,30 +24,38 @@ int main() {
         correct_rs_primitive_polynomial_ccsds, // Use the proper constant from your header.
         1,                                     // First consecutive root
         1,                                     // Generator root gap
-        NUM_ROOTS                              // Number of parity bytes
+     PARITY                              // Number of parity bytes
     );
-
+    
     if (!rs) {
         printf("Failed to create Reed-Solomon encoder/decoder.\n");
         return 1;
     }
-
+    printf("Input: ");
+    for (size_t i = 0; i < MSG_LEN; i++) {
+        printf("%02X ", message[i]);
+    }
+    printf("\n");
     // Encode. The encoded block will be 255 bytes in length.
     ssize_t encoded_len = correct_reed_solomon_encode(rs, message, sizeof(message), encoded);
     if (encoded_len <= 0) {
         printf("Encoding failed!\n");
         return 1;
     }
-
+    printf("Datos codificados: ");
+    for (size_t i = 0; i < encoded_len; i++) {
+        printf("%02X ", encoded[i]);
+    }
+    printf("\n");
     // Optionally, you can print the encoded block for inspection.
     printf("Encoded block length: %zd\n", encoded_len);
-
+    /*
     // Introduce errors. For instance, corrupt 4 bytes (well within the correctable limit of 8 errors).
     encoded[50]  ^= 0xFF;  // Flip bits in byte at index 50
     encoded[100] ^= 0xFF;  // Flip bits in byte at index 100
     encoded[150] ^= 0xFF;  // Flip bits in byte at index 150
     encoded[200] ^= 0xFF;  // Flip bits in byte at index 200
-
+    */
     // Decode the encoded block.
     ssize_t decoded_len = correct_reed_solomon_decode(rs, encoded, encoded_len, decoded);
 
@@ -65,7 +72,7 @@ int main() {
     }
 
     // Re-encode the decoded message
-    uint8_t re_encoded[256] = {0};
+    uint8_t re_encoded[255] = {0};
     correct_reed_solomon_encode(rs, decoded, decoded_len, re_encoded);
 
     // Check if the re-encoded message matches the corrupted one
