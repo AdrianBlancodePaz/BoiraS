@@ -1,6 +1,8 @@
 # BoiraS
 Aplicación en python diseñada para comunicarse con el hardware del cubesat St3llarSat-1 Boira desarrollado para como TFG de Adrián Blanco de Paz en la Universidad Carlos III de Madrid. Este programa permite enviar telecomandos así como recibir el hosekeeping y la telemetría del satélite. Además, spectrogram.py permite ver la intensidad de la señal en frecuencia recibida por la SDR en tiempo real.
 
+Atención! Esta aplicación no está terminada, por lo que podría tener problemas y/o comandos que no hagan ningún efecto.
+
 --------------------------------------------------------------------------------------------
 
 ## Instalación
