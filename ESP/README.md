@@ -9,7 +9,7 @@ Código para ESP32 para el sistema de telemetría y telecomandos del satélite S
 
 Este proyecto está desarrollado para un ESP32-S3 así como dos transceptores sx127X.
 
-![Imagen de WhatsApp 2025-11-10 a las 19 07 27_10a7c826](https://github.com/user-attachments/assets/8b87b277-2bfb-4bdd-94f4-ac3bf713fe87 | width=50)
+![Imagen de WhatsApp 2025-11-10 a las 19 07 27_10a7c826](https://github.com/user-attachments/assets/8b87b277-2bfb-4bdd-94f4-ac3bf713fe87)  | width=50
 
 # Firmware - ESP32 StellarSat-1 Boira (VSCode + ESP-IDF Extension) 
 
