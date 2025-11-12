@@ -7,6 +7,8 @@ Código para el sistema de telemetría y telecomandos del satélite StellarSat-1
 
 Atención: Esta es una primera revisión incompleta. Su funcionamiento consta de un mensaje de housekeeping, enviado por defecto cada 7 segundos. También está implementada la gestión de telecomandos así como de telecomandos prioritarios.
 
+Nota: Toda la lógica de FEC está basada en la librería https://github.com/quiet/libcorrect
+
 ## Hardware
 
 Este proyecto está desarrollado para un ESP32-S3 así como dos transceptores sx127X.
